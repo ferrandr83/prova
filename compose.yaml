@@ -1,0 +1,21 @@
+services:
+  home-assistant:
+    container_name: "home-assistant"
+    environment:
+      - "TZ=Europe/Madrid"
+    hostname: "raspberrypi"
+    image: "homeassistant/home-assistant:stable"
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - "/etc/letsencrypt:/certificate"
+      - "/home/ferran/docker/home-assistant:/config"
+      - "/var/run/dbus:/var/run/dbus"
+      - /etc/localtime:/etc/localtime:ro
+    working_dir: "/config"
+
+#    entrypoint:
+#      - "/init"
+#    logging:
+#      driver: "json-file"
+#      options: {}
